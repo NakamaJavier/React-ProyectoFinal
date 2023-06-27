@@ -12,8 +12,8 @@ dist
 dist-ssr
 *.local
 
-#env
-.env
+# env (Esta comentado para que funcione la web) 
+# .env
 
 # Editor directories and files
 .vscode/*
