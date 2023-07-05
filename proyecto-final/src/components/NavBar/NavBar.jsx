@@ -10,7 +10,7 @@ function NavBar() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary" data-bs-theme="dark" style={{ backgroundColor: "#06395e" }}>
             <div className="container-fluid">
                 <Link to="/" className="nav-item">
-                    <span className="navbar-brand">VarShoess</span>
+                    <span className="navbar-brand">VarShoes</span>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
