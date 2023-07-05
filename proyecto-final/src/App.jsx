@@ -7,14 +7,6 @@ import {BrowserRouter as Router, Route, Routes, Navigate, useParams} from "react
 import NavBar from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'
 
-//Views
-import Home from "./views/HomePage"
-import About from "./views/AboutPage"
-import Contact from "./views/ContactPage"
-import ErrorPage from "./views/ErrorPage"
-import DetailPage from './views/DetailPage'
-import CatalogPage from './views/CatalogPage'
-
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // fetch('../public/productos_bd.json')
@@ -31,7 +23,7 @@ function App() {
   return (
     <StockProvider>
       <CartProvider>
-        <Router>
+        <Router basename="/React-ProyectoFinal">
           <div className='body'>
               <NavBar/>
               <AppRoutes/>
