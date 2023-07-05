@@ -6,6 +6,7 @@
 .body {
   background-color: #002da81e;
   padding-bottom: 10px;
+  min-height: 100vh;
 }
 
 a{
