@@ -1,11 +1,10 @@
 import "./navbar.css"
 import CartWidget from '../CartWidget/CartWidget';
 import { Link } from "react-router-dom"
-import React, { useContext } from 'react';
-import { CartContext } from "../../context/CartContext";
+
+
 
 function NavBar() {
-    const {cartItems} = useContext(CartContext)
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary" data-bs-theme="dark" style={{ backgroundColor: "#06395e" }}>
             <div className="container-fluid">
@@ -31,9 +30,9 @@ function NavBar() {
                             <span className="nav-link" >Contacto</span>
                         </Link>
                     </ul>
-                    <button id="btnCarrito" type="button" className="btn cart" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <Link to="/cart" className="nav-item">
                         <CartWidget />
-                    </button>
+                    </Link>
                 </div>
             </div>
         </nav>

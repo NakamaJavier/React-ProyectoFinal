@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import "./itemdetail.css"
 import { CartContext, } from '../../context/CartContext';
 
@@ -19,6 +19,8 @@ function ItemDetail({ data }) {
             talle: selectedTalle,
             cantidad: selectedCantidad,
             img: data.img,
+            precio: data.precio,
+            id: data.id,
         };
         //Busco si el item ya se encuentra en el carrito
         const existingItem = cartItems.find(
@@ -44,6 +46,8 @@ function ItemDetail({ data }) {
                     return item;
                 });
                 setCartItems(updatedItems);
+                console.log(cartItems);
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
             }
             else
                 console.log("Se supero la cantidad del stock");
@@ -51,9 +55,9 @@ function ItemDetail({ data }) {
         //si no se encuentra en el carrito, lo agrega
         else {
             addToCart(newItem);
+            console.log(cartItems);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
         }
-
-
 
     }
 

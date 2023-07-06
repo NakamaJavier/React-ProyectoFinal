@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, useParams } from 'react-router-dom';
 import { StockContext} from '../context/StockContext';
 // Views
-import Home from '../views/HomePage';
-import About from '../views/AboutPage';
-import Contact from '../views/ContactPage';
-import ErrorPage from '../views/ErrorPage';
-import DetailPage from '../views/DetailPage';
-import CatalogPage from '../views/CatalogPage';
+import Home from '../views/HomePage/HomePage';
+import About from '../views/AboutPage/AboutPage';
+import Contact from '../views/ContactPage/ContactPage';
+import ErrorPage from '../views/ErrorPage/ErrorPage';
+import DetailPage from '../views/DetailPage/DetailPage';
+import CatalogPage from '../views/CatalogPage/CatalogPage';
+import CartPage from '../views/CartPage/CartPage';
 
 
 
@@ -18,12 +19,12 @@ function AppRouter() {
         if(products){
             const isValidId = products.some(product => product.id == id)
     
-        // Redirigir a la página de error si el ID no es válido
+        // Redirige a la página de error si el ID no es válido
         if (!isValidId) {
             return <Navigate to={redirectTo} />;
         }
     
-        // Renderizar el componente proporcionado
+        // Renderiza el componente proporcionado
         return <Element />;
         }
     }
@@ -33,6 +34,7 @@ function AppRouter() {
                 <Route path='/about' element={<About />} />
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/catalog' element={<CatalogPage />} />
+                <Route path='/cart' element={<CartPage />} />
                 <Route
                     path='/catalog/detail/:id'
                     element={

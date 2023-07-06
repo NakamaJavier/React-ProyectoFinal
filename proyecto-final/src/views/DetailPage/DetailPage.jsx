@@ -1,8 +1,8 @@
 import React, { useContext ,  useEffect, useState  } from 'react';
 import { useParams } from 'react-router-dom'
-import { StockContext,} from '../context/StockContext';
+import { StockContext,} from '../../context/StockContext';
 
-import ItemDetail from '../components/ItemDetail/ItemDetail';
+import ItemDetail from '../../components/ItemDetail/ItemDetail';
 
 const DetailPage = () => {
   const products = useContext(StockContext);
