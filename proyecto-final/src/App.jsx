@@ -1,7 +1,7 @@
 import './App.css'
 import { StockProvider } from "./context/StockContext"
 import { CartProvider } from './context/CartContext'
-import {BrowserRouter as Router, Route, Routes, Navigate, useParams} from "react-router-dom"
+import {BrowserRouter as Router} from "react-router-dom"
 
 //Components
 import NavBar from './components/NavBar/NavBar'
