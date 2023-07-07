@@ -1,0 +1,13 @@
+.cartPageContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.cartBuyContainer{
+    width: 25%;
+}
+
+.cartItemContainer{
+    width: 60%;
+}

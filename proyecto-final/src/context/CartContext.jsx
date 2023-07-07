@@ -1,8 +1,23 @@
-import { useState,useEffect, createContext } from "react"
+import { useState, useEffect, createContext } from "react"
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([])
+    const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState(false);
+
+    useEffect(() => {
+        const storedCartItems = localStorage.getItem('cartItems');
+        if (storedCartItems && !loadedFromLocalStorage) {
+            setCartItems(JSON.parse(storedCartItems));
+            setLoadedFromLocalStorage(true);
+        }
+    }, [loadedFromLocalStorage]);
+
+    useEffect(() => {
+        if (loadedFromLocalStorage) {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        }
+    }, [cartItems, loadedFromLocalStorage]);
 
     const addToCart = (product) => {
         setCartItems([...cartItems, product])
@@ -14,21 +29,8 @@ export const CartProvider = ({ children }) => {
 
     const clearCart = () => {
         setCartItems([]);
+        localStorage.removeItem('cartItems')
     }
-
-    useEffect(() => {
-        // Cargar los datos desde el almacenamiento local al estado
-        const storedCartItems = localStorage.getItem('cartItems');
-        if (storedCartItems) {
-            setCartItems(JSON.parse(storedCartItems));
-        }
-    }, []);
-
-    useEffect(() => {
-        // Guardar los datos en el almacenamiento local cuando cambie el estado
-        if(cartItems.length>0)
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }, [cartItems]);
 
     return (
         <CartContext.Provider value={{

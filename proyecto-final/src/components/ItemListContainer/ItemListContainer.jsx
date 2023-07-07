@@ -7,10 +7,6 @@ import Item from "../Item/Item";
 
 function ItemListContainer() {
     const products = useContext(StockContext);
-    if(products)
-    {
-        console.log(products);    
-    }
 
     return (
         <div className="contenedor d-flex justify-content-evenly flex-wrap  gap-3">

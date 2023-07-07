@@ -1,6 +1,6 @@
 .card-cart{
-    width:60% ;
-    margin: 10px;
+    width:100% ;
+
 }
 
 .product-info {
@@ -57,9 +57,10 @@
     width:20%;
 }
 .product-info .product-image {
-    width: 100%;
+    width: 90%;
     height: auto;
     margin-left: 5px;
+    margin-bottom: 5px;
 }
 
 .product-info .product-name {
@@ -75,9 +76,13 @@
 
 .product-info .quantity-btn {
     width:18px;
-    
 }
-
+.product-info .quantity-actual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
 .product-info .quantity-input {
     width: 30px;
     text-align: center;

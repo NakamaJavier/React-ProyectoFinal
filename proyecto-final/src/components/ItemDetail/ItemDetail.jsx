@@ -7,7 +7,6 @@ function ItemDetail({ data }) {
     const { addToCart, cartItems, setCartItems } = useContext(CartContext)
     const [selectedTalle, setSelectedTalle] = useState('');
     const [selectedCantidad, setSelectedCantidad] = useState(0);
-    console.log("los productos del changuito son:", cartItems);
 
     //Functions
 
@@ -29,10 +28,10 @@ function ItemDetail({ data }) {
         //si se encuentra en el carrito:
         if (existingItem) {
             const totalQuantity = existingItem.cantidad + newItem.cantidad;
-            console.log("selectedTalle:", selectedTalle,typeof(selectedTalle));
-            console.log("data.stock.talle:", typeof(data.stock[0].talle));
+            console.log("selectedTalle:", selectedTalle, typeof (selectedTalle));
+            console.log("data.stock.talle:", typeof (data.stock[0].talle));
             const stockItem = data.stock.find((item) => item.talle === selectedTalle);
-            console.log("stockItem:",stockItem);
+            console.log("stockItem:", stockItem);
             //verifica que la cantidad total a comprar sea menor o igual al stock disponible
             if (totalQuantity <= stockItem.cantidad) {
                 //como cartItems es un state, solo debe modificarse por medio de su funcion set, por lo que hay que crear un nuevo objeto y pasarlo como parametro a setCartItems
@@ -47,16 +46,14 @@ function ItemDetail({ data }) {
                 });
                 setCartItems(updatedItems);
                 console.log(cartItems);
-                localStorage.setItem('cartItems', JSON.stringify(cartItems));
             }
             else
                 console.log("Se supero la cantidad del stock");
-        } 
+        }
         //si no se encuentra en el carrito, lo agrega
         else {
             addToCart(newItem);
             console.log(cartItems);
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
         }
 
     }
@@ -96,17 +93,17 @@ function ItemDetail({ data }) {
         return null;
     };
     const isButtonDisabled = !selectedTalle || selectedCantidad === 0;
-    
+
     return (
         <div className='cardDetailContainer'>
             <div className="cardDetailL card" style={{ width: '20rem' }}>
                 <img src={data.img} className="card-img-top" alt="..." />
-                <div className="card-body">
+                <div className="card-body detailInfo">
                     <h4 className="card-title">
                         <strong>{data.nombre.charAt(0).toUpperCase() + data.nombre.slice(1)}</strong>
                     </h4>
                     <div className="shopMenu">
-                        <button disabled={isButtonDisabled} onClick={handleAddToCart} id="producto-${producto.id}" data-id="${producto.id}" className="btn btn-primary btnAdd">Añadir <i className="fa-solid fa-cart-plus"></i> </button>
+                        <button disabled={isButtonDisabled} onClick={handleAddToCart} className="btn btn-primary btnAdd">Añadir <i className="fa-solid fa-cart-plus"></i> </button>
                         <div className="menues">
                             <div>
                                 <label className='talleLabel' htmlFor="talle">Talle:</label>
@@ -128,12 +125,18 @@ function ItemDetail({ data }) {
             </div>
             <div className='cardDetailR card'>
                 <div className="card-body">
-                    <p className="card-text ml8px">
+                    <span className="card-text ml8px">
                         <strong>ID: #</strong> {data.id}<br />
+                    </span>
+                    <span className="card-text ml8px">
                         <strong>Marca:</strong> {data.marca} <br />
+                    </span>
+                    <span className="card-text ml8px">
                         <strong>Precio:</strong> ${data.precio}<br />
+                    </span>
+                    <span className="card-text ml8px">
                         <strong>Descripcion:</strong> {data.descripcion}
-                    </p>
+                    </span>
                 </div>
             </div>
         </div>
