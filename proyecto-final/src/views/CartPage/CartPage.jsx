@@ -2,7 +2,7 @@ import CartItemContainer from "../../components/CartItemContainer/CartItemContai
 
 function CartPage() {
     return (
-        <div className="contenedor d-flex justify-content-evenly flex-wrap  gap-3">
+        <div>
             <CartItemContainer/>
         </div>
     )

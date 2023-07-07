@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
 import "./itemdetail.css"
+import { useState, useContext } from 'react';
 import { CartContext, } from '../../context/CartContext';
 
 function ItemDetail({ data }) {
@@ -96,6 +96,7 @@ function ItemDetail({ data }) {
         return null;
     };
     const isButtonDisabled = !selectedTalle || selectedCantidad === 0;
+    
     return (
         <div className='cardDetailContainer'>
             <div className="cardDetailL card" style={{ width: '20rem' }}>
