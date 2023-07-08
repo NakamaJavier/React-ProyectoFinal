@@ -9,6 +9,7 @@ import ErrorPage from '../views/ErrorPage/ErrorPage';
 import DetailPage from '../views/DetailPage/DetailPage';
 import CatalogPage from '../views/CatalogPage/CatalogPage';
 import CartPage from '../views/CartPage/CartPage';
+import BrandPage from '../views/BrandPage/BrandPage';
 
 
 
@@ -41,6 +42,7 @@ function AppRouter() {
                         <CustomRoute redirectTo='/error' element={DetailPage} />
                     }
                 />
+                <Route path="/brand/:brandValue" element={<BrandPage/>}/>
                 <Route path='/error' element={<ErrorPage />} />
                 <Route path='*' element={<ErrorPage />} />
             </Routes>

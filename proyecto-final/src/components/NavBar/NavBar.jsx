@@ -23,6 +23,32 @@ function NavBar() {
                         <Link to="/catalog" className="nav-item">
                             <span className="nav-link" aria-current="page" >Catalogo</span>
                         </Link>
+                        <li className="nav-item dropdown ">
+                            <span className="nav-link bg-primary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Marcas
+                            </span>
+                            <ul className="dropdown-menu bg-primary">
+                                <Link to="/brand/adidas" className="dropdown-item">
+                                    <span className="dropdown-item">Adidas</span>
+                                </Link>
+                                <Link to="/brand/asics" className="dropdown-item">
+                                    <span className="dropdown-item">Asics</span>
+                                </Link>
+                                <Link to="/brand/diadora" className="dropdown-item">
+                                    <span className="dropdown-item">Diadora</span>
+                                </Link>
+                                <Link to="/brand/nike" className="dropdown-item">
+                                    <span className="dropdown-item">Nike</span>
+                                </Link>
+                                <Link to="/brand/reebok" className="dropdown-item">
+                                    <span className="dropdown-item">Reebok</span>
+                                </Link>
+                                <Link to="/brand/puma" className="dropdown-item">
+                                    <span className="dropdown-item">Puma</span>
+                                </Link>
+
+                            </ul>
+                        </li>
                         <Link to="/about" className="nav-item">
                             <span className="nav-link" >Nosotros</span>
                         </Link>
