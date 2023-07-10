@@ -39,13 +39,15 @@ footer .redes .redesFlex .twitter,
 footer .redes .redesFlex .insta {
     text-decoration: none;
 }
-
+footer .redes .redesFlex .insta {
+    margin-left: 50px;
+}
 footer .redes .redesFlex .face:after,
 footer .redes .redesFlex .twitter:after,
 footer .redes .redesFlex .insta:after {
     position: relative;
     top: 3px;
-    content: "facebook/VarPadel";
+    content: "facebook/VarShoes";
     font-size: 20px;
     font-weight: 600;
     color: white;

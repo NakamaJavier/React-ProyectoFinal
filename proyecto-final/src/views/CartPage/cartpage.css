@@ -6,8 +6,11 @@
 
 .cartBuyContainer{
     width: 25%;
+    min-width: 280px;
+    margin-left: 20px;
+    margin-right: 10px;
 }
 
 .cartItemContainer{
-    width: 60%;
+    width: 70%;
 }

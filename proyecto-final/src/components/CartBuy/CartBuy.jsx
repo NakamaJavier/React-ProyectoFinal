@@ -7,31 +7,10 @@ import { db } from '../../firebase/firebaseConfig'
 function CartBuy() {
     const { cartItems, clearCart } = useContext(CartContext)
     const [precioEnvio, setPrecioEnvio] = useState(0);
-    const [formData, setFormData] = useState({
-        nombre: '',
-        apellido: '',
-        ciudad: '',
-        email: '',
-        confirmarEmail: ''
-    });
-    const [formErrors, setFormErrors] = useState({
-        emailMismatch: false,
-        emptyFields: false
-    });
-    const [modalOpen, setModalOpen] = useState(false)
-
     const totalPrice = cartItems.reduce((acumulador, item) => {
         acumulador = item.cantidad * item.precio
         return acumulador
     }, 0)
-
-    let sumaCantidades = 0
-    if (cartItems.length > 0) {
-
-        sumaCantidades = cartItems.reduce((acumulador, item) => {
-            return acumulador + item.cantidad;
-        }, 0)
-    }
 
     useEffect(() => {
         if (cartItems.length > 0)
@@ -41,20 +20,76 @@ function CartBuy() {
     }, [cartItems])
 
     const handleBtnBuy = () => {
-        setModalOpen(true); // Abrir el modal al hacer clic en el botón "Añadir"
+        setModalOpen(true);
     };
+
+    let sumaCantidades = 0
+    if (cartItems.length > 0) {
+        sumaCantidades = cartItems.reduce((acumulador, item) => {
+            return acumulador + item.cantidad;
+        }, 0)
+    }
+
+
+
+    const [formData, setFormData] = useState({
+        nombre: '',
+        apellido: '',
+        ciudad: '',
+        email: '',
+        confirmarEmail: ''
+    });
+    const [formErrors, setFormErrors] = useState({
+        emailMismatch: false,
+        emptyFields: false,
+        invalidEmail: false,
+    });
+    const [emailValid, setEmailValid] = useState(true);
+    const [modalOpen, setModalOpen] = useState(false)
+    const emailInputClasses = `input-email ${!emailValid ? "input-error" : ""}`;
+
     const handleInputChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
+
+    const handleInputBlur = (event) => {
+        const { name, value } = event.target;
+
+        if (name === "email") {
+            const isValid = value.includes("@") || value=="";
+            setEmailValid(isValid);
+        }
+
+        if (name === "confirmarEmail" && value !== formData.email) {
+            setFormErrors({ ...formErrors, emailMismatch: true });
+        } else {
+            setFormErrors({ ...formErrors, emailMismatch: false });
+        }
+    };
+
+    const handleBtnClose = () => {
+        setModalOpen(false)
+        setFormData({
+            nombre: "",
+            apellido: "",
+            ciudad: "",
+            email: "",
+            confirmarEmail: "",
+        });
+    }
+
     const handleBtnFinishBuy = async (e) => {
         e.preventDefault();
         try {
+            const currentDateTime = new Date();
+            const purchaseDate = `${currentDateTime.getDate()}/${currentDateTime.getMonth() + 1}/${currentDateTime.getFullYear()} ${currentDateTime.getHours()}:${currentDateTime.getMinutes()}:${currentDateTime.getSeconds()}`;
             const docRef = await addDoc(collection(db, "purchasesCollection"), {
-                nombre: formData.nombre,
-                apellido: formData.apellido,
-                ciudad: formData.ciudad,
+                nombre: formData.nombre.charAt(0).toUpperCase() + formData.nombre.slice(1),
+                apellido: formData.apellido.charAt(0).toUpperCase() + formData.apellido.slice(1),
+                ciudad: formData.ciudad.charAt(0).toUpperCase() + formData.ciudad.slice(1),
                 email: formData.email,
                 cartItems: cartItems,
+                purchaseDate: purchaseDate,
             });
             clearCart()
             alert("Se concretó la compra con el ID: " + docRef.id);
@@ -70,7 +105,7 @@ function CartBuy() {
                 emailMismatch: false,
                 emptyFields: false,
             });
-            setModalOpen(false); 
+            setModalOpen(false);
         } catch (error) {
             console.error("Error al guardar los datos:", error);
         }
@@ -108,13 +143,18 @@ function CartBuy() {
                 </div>
                 <button onClick={handleBtnBuy} className="btn btn-primary btnBuy">Añadir</button>
             </div>
+
+            {/* MODAL DEL FORMULARIO */}
             {modalOpen && (
                 <div className="modal">
                     <div className="modal-content">
-                        <h3>Finalizar compra</h3>
+                        <button className="close-btn" onClick={handleBtnClose}>
+                            x
+                        </button>
+                        <h3>Finalizar compra: </h3>
                         <form>
                             <div className="form-group">
-                                <label>Nombre</label>
+                                <label>Nombre: </label>
                                 <input
                                     type="text"
                                     name="nombre"
@@ -123,7 +163,7 @@ function CartBuy() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Apellido</label>
+                                <label>Apellido: </label>
                                 <input
                                     type="text"
                                     name="apellido"
@@ -132,7 +172,7 @@ function CartBuy() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Ciudad</label>
+                                <label>Ciudad: </label>
                                 <input
                                     type="text"
                                     name="ciudad"
@@ -140,24 +180,28 @@ function CartBuy() {
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            <div className="form-group">
-                                <label>Email</label>
+                            <div className={"form-group " + emailInputClasses}>
+                                <label>Email: </label>
                                 <input
                                     type="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleInputChange}
+                                    onBlur={handleInputBlur}
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Confirmar Email</label>
+                                <label>Confirmar Email: </label>
                                 <input
                                     type="email"
                                     name="confirmarEmail"
                                     value={formData.confirmarEmail}
                                     onChange={handleInputChange}
+                                    onBlur={handleInputBlur}
                                 />
+                                {!emailValid && <p className="error">El correo es invalido</p>}
                                 {formErrors.emailMismatch && <p className="error">Los correos no coinciden</p>}
+
                             </div>
                         </form>
                         <button
