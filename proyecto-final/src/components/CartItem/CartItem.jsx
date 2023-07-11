@@ -3,15 +3,19 @@ import { Link } from "react-router-dom"
 import "./cartitem.css"
 import { StockContext } from '../../context/StockContext';
 import { CartContext } from '../../context/CartContext';
+import emptyCart from "../../img/carritovacio.png"
 
 function CartItem({ data }) {
-    const subtotal = data.precio * data.cantidad;
     const products = useContext(StockContext);
     const { cartItems, setCartItems, removeFromCart, clearCart } = useContext(CartContext)
     let maxQuantity = "-"
+    let subtotal
+    if (data != null){
+    subtotal = data.precio * data.cantidad;
     if (products) {
         maxQuantity = products.find(item => item.id === data.id).stock.find(stock => stock.talle == data.talle).cantidad
     }
+}
     const handleBtnPlus = () => {
         const updatedItems = cartItems.map((item) => {
             if (item.id == data.id && item.cantidad < maxQuantity) {
@@ -43,6 +47,7 @@ function CartItem({ data }) {
     }
 
     return (
+        data != null ?(
         <div className="card card-cart">
             <div className="product-info">
                 <div className='ordenPrimero'>
@@ -79,8 +84,19 @@ function CartItem({ data }) {
                     </div>
                 </div>
             </div>
-
         </div>
+        ) : (
+            <div className="card card-cart">
+                <div className="empty-cart">
+                    <img src={emptyCart} alt="" />
+                    <h3> Empieza tu compra</h3>
+                    <h4> Suma productos a tu carrito!</h4>
+                    <div>
+                        <Link to="/catalog" className="btn btn-primary">Comprar ahora</Link>
+                    </div>
+                </div>
+            </div>
+        )
     );
 }
 

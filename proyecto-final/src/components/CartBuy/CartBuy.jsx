@@ -124,6 +124,7 @@ function CartBuy() {
     };
 
     return (
+        cartItems.length > 0 ? (
         <div className="card card-cartBuy">
             <div className='cartBuyTitle'>
                 <h2>Resumen de compra</h2>
@@ -143,7 +144,7 @@ function CartBuy() {
                 </div>
                 <button onClick={handleBtnBuy} className="btn btn-primary btnBuy">Añadir</button>
             </div>
-
+            
             {/* MODAL DEL FORMULARIO */}
             {modalOpen && (
                 <div className="modal">
@@ -215,6 +216,16 @@ function CartBuy() {
                 </div>
             )}
         </div>
+        ) : (
+            <div className="card card-cartBuy-disable">
+                <div className='cartBuyTitle'>
+                    <h2>Resumen de compra</h2>
+                </div>
+                <div className='buyDetailContainer'>
+                    <h4> Aqui se veran los importes cuando sumes productos al carrito</h4>
+                </div>
+            </div>
+        )
     );
 }
 

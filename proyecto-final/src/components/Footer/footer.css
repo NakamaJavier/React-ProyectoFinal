@@ -25,7 +25,7 @@ footer .redes .redesFlex {
     flex-direction: row;
     justify-content: space-around;
     align-items: normal;
-    margin-left: 8.5vw;
+    margin-left: 120px;
 }
 
 footer .redes .redesFlex .redes_icon {
@@ -40,7 +40,7 @@ footer .redes .redesFlex .insta {
     text-decoration: none;
 }
 footer .redes .redesFlex .insta {
-    margin-left: 50px;
+    margin-left: 0px;
 }
 footer .redes .redesFlex .face:after,
 footer .redes .redesFlex .twitter:after,

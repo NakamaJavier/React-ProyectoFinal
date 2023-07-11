@@ -131,3 +131,14 @@
     border: none;
     background-color: transparent;
 }
+
+
+.card-cartBuy-disable h2{
+    color: rgba(41, 41, 41, 0.329);
+    border-bottom: 1px solid rgba(92, 91, 91, 0.096);
+}
+.card-cartBuy-disable h4{
+    color: rgba(99, 99, 99, 0.329);
+    font-size: 18px;
+    margin: 15px;
+}

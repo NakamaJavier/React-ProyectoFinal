@@ -14,7 +14,9 @@ function CartWidget() {
     }
     return (
         <div>
+            {sumaCantidades>0?
             <i className="fa-sharp fa-solid fa-cart-shopping fa-lg" style={{ color: '#ffffff' }}></i>
+            :<i className="fa-sharp fa-solid fa-cart-shopping fa-lg" style={{ color: '#dfdfdfc5' }}></i>}
             <span className="start-f translate-middle badge rounded-pill bg-danger top-f">
                 {sumaCantidades}
             </span>

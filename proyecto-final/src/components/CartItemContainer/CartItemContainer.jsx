@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext'
 import CartItem from '../../components/CartItem/CartItem'
 
+
+
 function CartItemContainer() {
     const { cartItems, clearCart } = useContext(CartContext)
 
@@ -10,7 +12,7 @@ function CartItemContainer() {
         clearCart()
     }
     return (
-        cartItems &&
+        cartItems.length>0? (
         <div className='CartItemContainer'>
             {cartItems.map((cartItem) => (
                 <div key={cartItem.id}>
@@ -22,7 +24,12 @@ function CartItemContainer() {
                     Vaciar Carrito
                 </button>
             )}
-        </div>
+        </div>)
+        : (
+            <div className='CartItemContainer'>
+                <CartItem data={null} />
+            </div>
+        )
     )
 }
 

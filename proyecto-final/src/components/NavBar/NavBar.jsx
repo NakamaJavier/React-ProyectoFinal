@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 
 function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary" data-bs-theme="dark" style={{ backgroundColor: "#06395e" }}>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
                 <Link to="/" className="nav-item">
                     <span className="navbar-brand">VarShoes</span>
@@ -24,27 +24,27 @@ function NavBar() {
                             <span className="nav-link" aria-current="page" >Catalogo</span>
                         </Link>
                         <li className="nav-item dropdown ">
-                            <span className="nav-link bg-primary dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span className="nav-link  dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Marcas
                             </span>
-                            <ul className="dropdown-menu bg-primary">
-                                <Link to="/brand/adidas" className="dropdown-item">
-                                    <span className="dropdown-item">Adidas</span>
+                            <ul className="dropdown-menu bg-primary ">
+                                <Link to="/brand/adidas" className="dropdown-item ">
+                                    <span>Adidas</span>
                                 </Link>
                                 <Link to="/brand/asics" className="dropdown-item">
-                                    <span className="dropdown-item">Asics</span>
+                                    <span>Asics</span>
                                 </Link>
                                 <Link to="/brand/diadora" className="dropdown-item">
-                                    <span className="dropdown-item">Diadora</span>
+                                    <span>Diadora</span>
                                 </Link>
                                 <Link to="/brand/nike" className="dropdown-item">
-                                    <span className="dropdown-item">Nike</span>
+                                    <span>Nike</span>
                                 </Link>
                                 <Link to="/brand/reebok" className="dropdown-item">
-                                    <span className="dropdown-item">Reebok</span>
+                                    <span>Reebok</span>
                                 </Link>
                                 <Link to="/brand/puma" className="dropdown-item">
-                                    <span className="dropdown-item">Puma</span>
+                                    <span>Puma</span>
                                 </Link>
 
                             </ul>
