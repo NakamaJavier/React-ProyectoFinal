@@ -95,8 +95,10 @@
 }
 
 .product-info .quantity-input {
-    width: 30px;
+    width: 40px;
     text-align: center;
+    padding: 0px;
+    margin: 0px;
 }
 
 .product-info .price-container {
@@ -117,7 +119,7 @@
 }
 
 .empty-cart h3 {
-    color: #000;
+    color: #0000009c;
     font-size: 30px;
 }
 

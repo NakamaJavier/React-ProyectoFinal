@@ -1,6 +1,5 @@
-
 import { initializeApp } from "firebase/app";
-import { getFirestore,collection,addDoc,setDoc,doc} from "firebase/firestore";
+import { getFirestore,setDoc,doc,collection,addDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,10 +17,17 @@ export const db = getFirestore(app)
 
 
 
-const cargarDatos = async (items)=> {
-    const docRef = await setDoc(doc(db,"shoes","productos"),{
-        items
-    })
-}
+const cargarDatos = async (jsonData) => {
+    try {
+        const shoesCollectionRef = collection(db, "shoes");
+        for (const item of jsonData) {
+            const docRef = await addDoc(shoesCollectionRef, item);
+            console.log("Documento agregado con ID:", docRef.id);
+        }
+        console.log("Datos cargados correctamente en Firebase");
+    } catch (error) {
+        console.error("Error al cargar los datos en Firebase:", error);
+    }
+};
 
 export default cargarDatos;

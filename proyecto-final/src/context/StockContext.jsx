@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs } from "firebase/firestore"
+import { collection, query, where, getDocs, getDoc,doc } from "firebase/firestore"
 import { db } from "../firebase/firebaseConfig"
 import { useState, useEffect, createContext } from "react"
 
@@ -9,13 +9,12 @@ export const StockProvider = ({ children }) => {
 
     useEffect(() => {
         const getStock = async () => {
-            const q = query(collection(db, "shoes"))
-            const querySnapshot = await getDocs(q)
-            let data
-            querySnapshot.forEach((doc) => {
-                data = doc.data()
-            })
-            setStock(data.items)
+            const q = doc(db, "shoes", "productos")
+            const docSnap = await getDoc(q)
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                setStock(data.items);
+            }
         }
         getStock()
     }, [])

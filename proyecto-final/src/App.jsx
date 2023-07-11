@@ -2,6 +2,7 @@ import './App.css'
 import { StockProvider } from "./context/StockContext"
 import { CartProvider } from './context/CartContext'
 import { BrowserRouter as Router } from "react-router-dom"
+import  cargarDatos  from "./firebase/firebaseConfig"
 
 //Components
 import NavBar from './components/NavBar/NavBar'
