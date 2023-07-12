@@ -6,9 +6,7 @@ import Item from '../../components/Item/Item';
 
 function BrandPage() {
     const products = useContext(StockContext);
-    console.log(products);
     const {brandValue} = useParams()
-    console.log(brandValue);
     return (
         <div className="contenedor d-flex justify-content-evenly flex-wrap  gap-3">
         { 

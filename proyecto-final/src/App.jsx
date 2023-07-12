@@ -2,7 +2,7 @@ import './App.css'
 import { StockProvider } from "./context/StockContext"
 import { CartProvider } from './context/CartContext'
 import { BrowserRouter as Router } from "react-router-dom"
-import  cargarDatos  from "./firebase/firebaseConfig"
+import  {rebootStock}  from "./firebase/firebaseConfig"
 
 //Components
 import NavBar from './components/NavBar/NavBar'
@@ -16,7 +16,7 @@ import Footer from './components/Footer/Footer'
 //         .then(productosParseados=> {
 //             const productos =productosParseados
 //             console.log("Cargo por el json productos_bd:",productos);
-//             cargarDatos(productos)
+//             rebootStock(productos)
 //         })
 
 ////////////////////////////////////////////////////////////////////////////////
