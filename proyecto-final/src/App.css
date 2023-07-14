@@ -8,7 +8,6 @@
 .body {
   background-color: #002da81e;
   position: relative;
-  padding-bottom: 30px;
   min-height: calc(100vh - 75px);
   box-sizing: border-box;
 }

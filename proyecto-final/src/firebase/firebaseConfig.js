@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore,collection,addDoc,getDocs, query, where } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_FB_API_KEY,
@@ -28,19 +28,38 @@ export const rebootStock = async (jsonData) => {
     }
 };
 
-export const getStock = async (varFilter=null) => {
+export const getStock = async (varFilter = null) => {
     let q = null
-    if(!varFilter){
-        q = collection(db, "shoes");
+    const verifyFilter = !varFilter ||
+        !varFilter.marca ||
+        varFilter.marca.length === 0 ||
+        varFilter.precioMax === undefined ||
+        varFilter.precioMin === undefined;
+    q = collection(db, "shoes");
+
+    if (varFilter.marca && varFilter.marca.length > 0) {
+        q = query(q, where("marca", "in", varFilter.marca));
+        console.log("entro a filtrar por marca");
     }
-    else{
-        q = query(collection(db, "shoes"), where("marca", "==", varFilter.marca), where("precio", "<=", varFilter.precioMax),where("precio", ">=", varFilter.precioMin));
+
+    if (varFilter.precioMin && varFilter.precioMax) {
+        q = query(
+            q,
+            where("precio", "<=", varFilter.precioMax),
+            where("precio", ">=", varFilter.precioMin)
+        );
+        console.log("entro a filtrar por precio");
     }
     const querySnapshot = await getDocs(q);
     const data = [];
     querySnapshot.forEach((doc) => {
-        if(doc.id!="productos")
-        data.push(doc.data());
+        const itemData = doc.data()
+        if (varFilter.talle?.length > 0) {
+            const filteredStock = itemData.stock.filter((item) =>
+                varFilter?.talle?.includes(item.talle))
+            filteredStock.length > 0 && data.push(itemData)
+        } else
+            data.push(itemData)
     });
     return data;
 };

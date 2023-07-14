@@ -1,27 +1,38 @@
-import { getStock } from "../firebase/firebaseConfig"
-import { useState, useEffect, createContext } from "react"
+import { getStock } from "../firebase/firebaseConfig";
+import { useState, useEffect, createContext } from "react";
 
-export const StockContext = createContext()
+export const StockContext = createContext();
 
 export const StockProvider = ({ children }) => {
-    const [stock, setStock] = useState(null)
-    const filtObj = {
-        precioMax: 40000,
-        precioMin: 20000,
-        marca: "Nike",
-    }
+    const [stock, setStock] = useState(null);
+    const [filtObj, setFiltObj] = useState({
+        precioMin: null,
+        precioMax: null,
+        marca: null,
+        talle: null,
+    });
+
     useEffect(() => {
-        getStock()
-            .then(products => {
+        const { precioMin, precioMax, marca, talle } = filtObj;
+
+        const filteredFiltObj = {
+            precioMin: precioMin !== null ? precioMin : undefined,
+            precioMax: precioMax !== null ? precioMax : undefined,
+            marca: marca !== null ? marca : undefined,
+            talle: talle !== null ? talle : undefined,
+        };
+        getStock(filteredFiltObj)
+            .then((products) => {
                 setStock(products);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("Error al obtener el stock:", error);
             });
-    }, []);
+    }, [filtObj]);
 
     return (
-        <StockContext.Provider value={stock}> {children} </StockContext.Provider>
-    )
-}
-
+        <StockContext.Provider value={{ stock, setFiltObj,filtObj }}>
+            {children}
+        </StockContext.Provider>
+    );
+};

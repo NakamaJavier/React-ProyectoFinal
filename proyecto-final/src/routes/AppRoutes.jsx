@@ -16,7 +16,7 @@ import BrandPage from '../views/BrandPage/BrandPage';
 function AppRouter() {
     function CustomRoute({ element: Element, redirectTo }) {
         const { id } = useParams();
-        const products = useContext(StockContext);
+        const {stock:products} = useContext(StockContext);
         if(products){
             const isValidId = products.some(product => product.id == id)
     

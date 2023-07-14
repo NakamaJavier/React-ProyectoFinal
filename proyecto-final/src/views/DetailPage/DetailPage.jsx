@@ -1,11 +1,11 @@
-import React, { useContext ,  useEffect, useState  } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom'
 import { StockContext,} from '../../context/StockContext';
 
 import ItemDetail from '../../components/ItemDetail/ItemDetail';
 
 const DetailPage = () => {
-  const products = useContext(StockContext);
+  const {stock: products} = useContext(StockContext);
   let {id} = useParams()
   return (
     products &&

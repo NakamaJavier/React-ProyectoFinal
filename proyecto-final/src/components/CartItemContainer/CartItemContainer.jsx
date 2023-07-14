@@ -7,7 +7,6 @@ import CartItem from '../../components/CartItem/CartItem'
 
 function CartItemContainer() {
     const { cartItems, clearCart } = useContext(CartContext)
-
     const handleBtnCartClear = () => {
         clearCart()
     }
