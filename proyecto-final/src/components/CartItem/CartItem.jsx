@@ -6,7 +6,7 @@ import { CartContext } from '../../context/CartContext';
 import emptyCart from "../../img/carritovacio.png"
 
 function CartItem({ data }) {
-    const products = useContext(StockContext);
+    const {stock:products} = useContext(StockContext);
     const { cartItems, setCartItems, removeFromCart, clearCart } = useContext(CartContext)
     let maxQuantity = "-"
     let subtotal
