@@ -42,8 +42,13 @@
     flex-direction: column;
 
 }
-
-.product-info .ordenSegundo h2 {
+.product-info .ordenSegundo .product-name-container{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+.product-info .ordenSegundo .product-name-container h2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,16 +56,20 @@
     font-weight: bolder;
     color: rgb(2, 2, 119);
     font-size: 20px;
-    height: 40px;
+    height: auto;
     margin-top: 10px;
     margin-bottom: 0px;
+    margin-right: 5px;
     border-bottom: none;
 }
 
 .product-info .ordenTercero {
     width: 20%;
 }
-
+.product-info .ordenTercero .quantity-container h4{
+    font-size: 18px;
+    margin-top: 5px;
+}
 .product-info .ordenCuarto {
     width: 20%;
 }

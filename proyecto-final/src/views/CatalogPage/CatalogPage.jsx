@@ -40,7 +40,9 @@ function CatalogPage() {
       setMarcas((prevMarcas) => prevMarcas.filter((m) => m !== marca));
     }
   };
-
+  useEffect(() => {
+    console.log(products);
+}, [products])
   useEffect(() => {
     if (products && !firstCount) {
       const dataBrands = [];

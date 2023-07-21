@@ -1,5 +1,5 @@
 import "./itemdetail.css"
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { CartContext, } from '../../context/CartContext';
 
 function ItemDetail({ data }) {
@@ -28,10 +28,7 @@ function ItemDetail({ data }) {
         //si se encuentra en el carrito:
         if (existingItem) {
             const totalQuantity = existingItem.cantidad + newItem.cantidad;
-            console.log("selectedTalle:", selectedTalle, typeof (selectedTalle));
-            console.log("data.stock.talle:", typeof (data.stock[0].talle));
             const stockItem = data.stock.find((item) => item.talle === selectedTalle);
-            console.log("stockItem:", stockItem);
             //verifica que la cantidad total a comprar sea menor o igual al stock disponible
             if (totalQuantity <= stockItem.cantidad) {
                 //como cartItems es un state, solo debe modificarse por medio de su funcion set, por lo que hay que crear un nuevo objeto y pasarlo como parametro a setCartItems
@@ -45,7 +42,6 @@ function ItemDetail({ data }) {
                     return item;
                 });
                 setCartItems(updatedItems);
-                console.log(cartItems);
             }
             else
                 console.log("Se supero la cantidad del stock");
@@ -53,11 +49,14 @@ function ItemDetail({ data }) {
         //si no se encuentra en el carrito, lo agrega
         else {
             addToCart(newItem);
-            console.log(cartItems);
+            console.log("newItem:",newItem);
         }
 
     }
+    useEffect(()=>{
 
+        console.log(cartItems);
+    },[cartItems])
     const handleTalleChange = (e) => {
         setSelectedTalle(parseInt(e.target.value));
         setSelectedCantidad(0);

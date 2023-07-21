@@ -15,7 +15,9 @@ p {
 }
 .center-link {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center
 }
 .btn-shop-now {
     padding: 10px 20px;
@@ -25,4 +27,15 @@ p {
     border: none;
     border-radius: 5px;
     width: 20rem;
+}
+.btn-reboot-server{
+    padding: 10px 50px;
+    font-size: 30px;
+    margin-top: 15vh;
+    background-color: #f80000;
+    color: white;
+    font-weight: bolder;
+    border: none;
+    border-radius: 5px;
+    width: 25rem;
 }

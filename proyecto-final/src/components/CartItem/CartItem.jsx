@@ -57,12 +57,18 @@ function CartItem({ data }) {
                 </div>
                 <div className='ordenSegundo'>
                     <Link to={`/catalog/detail/${data.id}`}>
+                        <div className='product-name-container'>
                         <h2 className="product-name">{data.nombre}</h2>
+                        <span>(talle:{data.talle})</span>
+                        </div>
                     </Link>
                     <button onClick={handleBtnEraseItem} className="btn-erase">Eliminar</button>
                 </div>
                 <div className='ordenTercero'>
                     <div className="quantity-container">
+                        <div>
+                            <h4>Cantidad: </h4>
+                        </div>
                         <div className='quantity-actual'>
                             <button onClick={handleBtnMinus} className="quantity-btn btn-minus">-</button>
                             <input type="number" className="quantity-input" value={data.cantidad} readOnly />

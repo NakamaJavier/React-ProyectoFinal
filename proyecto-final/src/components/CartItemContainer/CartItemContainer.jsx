@@ -14,7 +14,7 @@ function CartItemContainer() {
         cartItems.length>0? (
         <div className='CartItemContainer'>
             {cartItems.map((cartItem) => (
-                <div key={cartItem.id}>
+                <div key={`${cartItem.id}-${cartItem.talle}`}>
                     <CartItem data={cartItem} />
                 </div>
             ))}

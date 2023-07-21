@@ -21,7 +21,16 @@ function BrandPage() {
             marca: [brand],
             talle: undefined,
         });
-    }, [brand,setFiltObj]);
+        return () => {
+            setFiltObj({
+                precioMin: null,
+                precioMax: null,
+                marca: null,
+                talle: null,
+            });
+        };
+    }, [brand, setFiltObj]);
+    
     useEffect(() => {
         console.log(products);
     }, [products])

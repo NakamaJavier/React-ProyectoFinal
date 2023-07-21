@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_FB_API_KEY,
@@ -13,14 +13,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 
-
-
 export const rebootStock = async (jsonData) => {
     try {
         const shoesCollectionRef = collection(db, "shoes");
         for (const item of jsonData) {
-            const docRef = await addDoc(shoesCollectionRef, item);
-            //console.log("Documento agregado con ID:", docRef.id);
+            await setDoc(doc(shoesCollectionRef, item.id.toString()), item);
         }
         console.log("Datos cargados correctamente en Firebase");
     } catch (error) {
@@ -39,7 +36,6 @@ export const getStock = async (varFilter = null) => {
 
     if (varFilter.marca && varFilter.marca.length > 0) {
         q = query(q, where("marca", "in", varFilter.marca));
-        console.log("entro a filtrar por marca");
     }
 
     if (varFilter.precioMin && varFilter.precioMax) {
@@ -48,7 +44,6 @@ export const getStock = async (varFilter = null) => {
             where("precio", "<=", varFilter.precioMax),
             where("precio", ">=", varFilter.precioMin)
         );
-        console.log("entro a filtrar por precio");
     }
     const querySnapshot = await getDocs(q);
     const data = [];
